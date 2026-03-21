@@ -316,7 +316,7 @@ const experiences: Experience[] = (
       endYear: "2025",
       period: "2025",
       company: "Consensus 2025 Aptos Hackathon",
-      role: "2nd Runner Up — HealthDB",
+      role: "1st Runner Up — HealthDB",
       location: "Remote",
       type: "activity",
       description: [
@@ -499,7 +499,7 @@ function DetailPanel({ experience }: { experience: Experience }) {
 
 // ─── Main App ────────────────────────────────────────────────────
 export function App() {
-  const [selectedId, setSelectedId] = useState(experiences[experiences.length - 1].id);
+  const [selectedId, setSelectedId] = useState(experiences[0].id);
   const scrollRef = useRef<HTMLDivElement>(null);
   const frameRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
 
