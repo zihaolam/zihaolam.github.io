@@ -420,12 +420,12 @@ function FilmFrame({
     >
       <div className="flex items-end gap-1.5">
         <div
-          className={`text-[28px] font-bold leading-none tracking-tight ${exp.endYear === "Present" ? "text-emerald-400" : "text-[#ededed]"}`}
+          className={`text-[20px] md:text-[28px] font-bold leading-none tracking-tight ${exp.endYear === "Present" ? "text-emerald-400" : "text-[#ededed]"}`}
         >
           {exp.endYear}
         </div>
         {exp.endYear !== exp.year && (
-          <div className="text-[13px] text-[#555] mb-1 leading-none">&larr; {exp.year}</div>
+          <div className="text-[11px] md:text-[13px] text-[#555] mb-0.5 md:mb-1 leading-none">&larr; {exp.year}</div>
         )}
       </div>
       <span className="text-xs font-medium text-[#ededed] truncate w-full">{exp.company}</span>
@@ -439,15 +439,6 @@ function FilmFrame({
   );
 }
 
-function SprocketRow({ count }: { count: number }) {
-  return (
-    <div className="flex gap-2 px-3 py-1">
-      {Array.from({ length: count }).map((_, i) => (
-        <div key={i} className="w-3 h-[9px] rounded-[2px] bg-[#050505] shrink-0" />
-      ))}
-    </div>
-  );
-}
 
 function DetailPanel({ experience }: { experience: Experience }) {
   return (
@@ -519,9 +510,6 @@ export function App() {
     }
   }, []);
 
-  // Calculate sprocket count to cover all frames
-  const totalWidth = experiences.length * 210 + (experiences.length - 1) * 8 + 48;
-  const sprocketCount = Math.ceil(totalWidth / 20);
 
   return (
     <div className="flex flex-col h-screen bg-[#0a0a0a]">
@@ -564,7 +552,7 @@ export function App() {
           className="overflow-x-auto overflow-y-hidden [scrollbar-width:thin] [scrollbar-color:#333_transparent]"
         >
           <div className="min-w-fit">
-            <SprocketRow count={sprocketCount} />
+
             <div className="flex gap-2 px-3 py-1">
               {experiences.map((exp) => (
                 <FilmFrame
@@ -578,7 +566,7 @@ export function App() {
                 />
               ))}
             </div>
-            <SprocketRow count={sprocketCount} />
+
           </div>
         </div>
       </div>
