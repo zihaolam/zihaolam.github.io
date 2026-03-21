@@ -497,6 +497,11 @@ function DetailPanel({ experience }: { experience: Experience }) {
   );
 }
 
+// Collect unique technologies across all experiences
+const allTechnologies = Array.from(
+  new Set(experiences.flatMap((e) => e.technologies))
+);
+
 // ─── Main App ────────────────────────────────────────────────────
 export function App() {
   const [selectedId, setSelectedId] = useState(experiences[0].id);
@@ -575,6 +580,17 @@ export function App() {
             </div>
             <SprocketRow count={sprocketCount} />
           </div>
+        </div>
+      </div>
+
+      {/* ── Tech Scroll Bar ── */}
+      <div className="shrink-0 border-b border-[#1a1a1a] bg-[#0a0a0a]">
+        <div
+          className="flex gap-2 px-4 py-2.5 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {allTechnologies.map((tech) => (
+            <TechBadge key={tech} name={tech} />
+          ))}
         </div>
       </div>
 
