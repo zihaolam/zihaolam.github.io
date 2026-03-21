@@ -372,7 +372,7 @@ function TechBadge({ name }: { name: string }) {
   const [iconError, setIconError] = useState(false);
 
   return (
-    <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-[#151515] border border-[#222] rounded-md hover:border-[#444] hover:bg-[#1a1a1a] transition-all duration-200">
+    <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-[#151515] border border-[#222] rounded-md hover:border-[#444] hover:bg-[#1a1a1a] transition-all duration-200 shrink-0">
       {iconUrl && !iconError ? (
         <img
           src={iconUrl}
@@ -583,17 +583,6 @@ export function App() {
         </div>
       </div>
 
-      {/* ── Tech Scroll Bar ── */}
-      <div className="shrink-0 border-b border-[#1a1a1a] bg-[#0a0a0a]">
-        <div
-          className="flex gap-2 px-4 py-2.5 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-        >
-          {allTechnologies.map((tech) => (
-            <TechBadge key={tech} name={tech} />
-          ))}
-        </div>
-      </div>
-
       {/* ── Detail Panel ── */}
       <div className="flex-1 overflow-y-auto [scrollbar-width:thin] [scrollbar-color:#333_transparent]">
         {selected ? (
@@ -603,6 +592,17 @@ export function App() {
             Select a frame to view details
           </div>
         )}
+      </div>
+
+      {/* ── Tech Scroll Bar (sticky bottom) ── */}
+      <div className="shrink-0 border-t border-[#1a1a1a] bg-[#0a0a0a]">
+        <div
+          className="flex gap-2 px-4 py-2.5 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {allTechnologies.map((tech) => (
+            <TechBadge key={tech} name={tech} />
+          ))}
+        </div>
       </div>
     </div>
   );
