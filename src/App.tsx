@@ -235,6 +235,31 @@ const experiences: Experience[] = (
       ],
     },
     {
+      id: "aws-full",
+      year: "2022",
+      endYear: "2023",
+      period: "Aug 2022 — Aug 2023",
+      company: "Amazon Web Services",
+      role: "Cloud Solutions Architect",
+      location: "Kuala Lumpur, Malaysia",
+      type: "work",
+      description: [
+        "Designed cloud architectures and migration strategies for data-sensitive and critical government-sector workloads.",
+        "Delivered AWS training to technical teams covering compute, databases, data warehouses, and event-driven architectures.",
+        "Built internal tools including a reusable asset platform for the ASEAN team and a BI dashboard monitoring storage usage across Malaysia.",
+        "Contributed to the cloud migration strategy that enabled customers for the AWS Kuala Lumpur Region Launch.",
+      ],
+      technologies: [
+        "AWS",
+        "Terraform",
+        "Typescript",
+        "Golang",
+        "DynamoDB",
+        "PostgreSQL",
+        "Docker",
+      ],
+    },
+    {
       id: "lean-social",
       year: "2022",
       endYear: "2023",
@@ -260,31 +285,6 @@ const experiences: Experience[] = (
         "DynamoDB",
         "Scikit-learn",
         "PyTorch",
-      ],
-    },
-    {
-      id: "aws-full",
-      year: "2022",
-      endYear: "2023",
-      period: "Aug 2022 — Aug 2023",
-      company: "Amazon Web Services",
-      role: "Cloud Solutions Architect",
-      location: "Kuala Lumpur, Malaysia",
-      type: "work",
-      description: [
-        "Designed cloud architectures and migration strategies for data-sensitive and critical government-sector workloads.",
-        "Delivered AWS training to technical teams covering compute, databases, data warehouses, and event-driven architectures.",
-        "Built internal tools including a reusable asset platform for the ASEAN team and a BI dashboard monitoring storage usage across Malaysia.",
-        "Contributed to the cloud migration strategy that enabled customers for the AWS Kuala Lumpur Region Launch.",
-      ],
-      technologies: [
-        "AWS",
-        "Terraform",
-        "Typescript",
-        "Golang",
-        "DynamoDB",
-        "PostgreSQL",
-        "Docker",
       ],
     },
     {
@@ -321,7 +321,7 @@ const experiences: Experience[] = (
       type: "activity",
       description: [
         "Built HealthDB — a local-first, GDPR and HIPAA compliant personal health data platform that aggregates data from wearables (Oura, Apple Health), medical devices, and conversations.",
-        "Implemented a conversational interface allowing users to discover insights by \"talking\" to their health data — generating personalized diet plans, symptom analysis, and condition monitoring.",
+        'Implemented a conversational interface allowing users to discover insights by "talking" to their health data — generating personalized diet plans, symptom analysis, and condition monitoring.',
         "Built a probabilistically-weighted Monte Carlo Tree Search (MCTS) engine to generate contextually rich, accurate, and scored health recommendations.",
         "Designed a structured, local-first medical history system that summarizes, extracts, and collates every dimension of a user's health data.",
       ],
@@ -342,7 +342,7 @@ const experiences: Experience[] = (
         "Designed and integrated a durable workflows engine, dramatically improving the reliability of business-critical code paths.",
         "Developed AI Agents powering voice synthesis and image/video generation for AI avatars.",
         "Implemented end-to-end observability with OpenTelemetry across HTTP handler spans, structured logging, and server utilization metrics — significantly accelerating bug discovery and resolution times.",
-      "Integrated Web3 payment flows using Solana blockchain.",
+        "Integrated Web3 payment flows using Solana blockchain.",
         "Built a hybrid recommendation system combining text and image vector embeddings for personalized content discovery.",
       ],
       technologies: [
@@ -425,7 +425,9 @@ function FilmFrame({
           {exp.endYear}
         </div>
         {exp.endYear !== exp.year && (
-          <div className="text-[11px] md:text-[13px] text-[#555] mb-0.5 md:mb-1 leading-none">&larr; {exp.year}</div>
+          <div className="text-[11px] md:text-[13px] text-[#555] mb-0.5 md:mb-1 leading-none">
+            &larr; {exp.year}
+          </div>
         )}
       </div>
       <span className="text-xs font-medium text-[#ededed] truncate w-full">{exp.company}</span>
@@ -438,7 +440,6 @@ function FilmFrame({
     </button>
   );
 }
-
 
 function DetailPanel({ experience }: { experience: Experience }) {
   return (
@@ -489,13 +490,11 @@ function DetailPanel({ experience }: { experience: Experience }) {
 }
 
 // Collect unique technologies across all experiences
-const allTechnologies = Array.from(
-  new Set(experiences.flatMap((e) => e.technologies))
-);
+const allTechnologies = Array.from(new Set(experiences.flatMap((e) => e.technologies)));
 
 // ─── Main App ────────────────────────────────────────────────────
 export function App() {
-  const [selectedId, setSelectedId] = useState(experiences[0].id);
+  const [selectedId, setSelectedId] = useState(experiences[0]?.id);
   const scrollRef = useRef<HTMLDivElement>(null);
   const frameRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
 
@@ -509,7 +508,6 @@ export function App() {
       el.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
     }
   }, []);
-
 
   return (
     <div className="flex flex-col h-screen bg-[#0a0a0a]">
@@ -552,7 +550,6 @@ export function App() {
           className="overflow-x-auto overflow-y-hidden [scrollbar-width:thin] [scrollbar-color:#333_transparent]"
         >
           <div className="min-w-fit">
-
             <div className="flex gap-2 px-3 py-1">
               {experiences.map((exp) => (
                 <FilmFrame
@@ -566,7 +563,6 @@ export function App() {
                 />
               ))}
             </div>
-
           </div>
         </div>
       </div>
@@ -584,9 +580,7 @@ export function App() {
 
       {/* ── Tech Scroll Bar (sticky bottom) ── */}
       <div className="shrink-0 border-t border-[#1a1a1a] bg-[#0a0a0a]">
-        <div
-          className="flex gap-2 px-4 py-2.5 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-        >
+        <div className="flex gap-2 px-4 py-2.5 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {allTechnologies.map((tech) => (
             <TechBadge key={tech} name={tech} />
           ))}
